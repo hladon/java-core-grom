@@ -2,6 +2,7 @@ package lesson20.task2;
 
 import lesson20.task2.Exception.BadRequestException;
 import lesson20.task2.Exception.InternalServerException;
+import lesson20.task2.Exception.LimitExceeded;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -27,9 +28,9 @@ public class TransactionDAO {
 
     }
 
-    private void validate(Transaction transaction) throws BadRequestException.LimitExceeded {
+    private void validate(Transaction transaction) throws LimitExceeded {
         if (transaction.getAmount() > utils.getLimitSimpleTransactionAmount()) {
-            throw new BadRequestException.LimitExceeded("Transaction limit exceed " + transaction.getId() + ". Can`t be saved");
+            throw new LimitExceeded("Transaction limit exceed " + transaction.getId() + ". Can`t be saved");
         }
 
         int sum = 0;
@@ -40,18 +41,18 @@ public class TransactionDAO {
         }
 
         if (sum > utils.getLimitTransactionsPerDayAmount()) {
-            throw new BadRequestException.LimitExceeded("Transaction limit per day amount exceed " + transaction.getId() + ". Can`t be saved");
+            throw new LimitExceeded("Transaction limit per day amount exceed " + transaction.getId() + ". Can`t be saved");
         }
 
         if (count > utils.getLimitTransactionsPerDayCount()) {
-            throw new BadRequestException.LimitExceeded("Transaction limit per day count exceed " + transaction.getId() + ". Can`t be saved");
+            throw new LimitExceeded("Transaction limit per day count exceed " + transaction.getId() + ". Can`t be saved");
         }
         for (String city : utils.getCities()) {
             if (city.equals(transaction.getCity())) {
                 return;
             }
         }
-        throw new BadRequestException.LimitExceeded("Transaction from not allowed city " + transaction.getId() + ". Can`t be saved");
+        throw new LimitExceeded("Transaction from not allowed city " + transaction.getId() + ". Can`t be saved");
     }
 
     public Transaction[] transactionList() {
