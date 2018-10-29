@@ -17,6 +17,10 @@ public class TransactionDAO {
         }
 
         validate(transaction);
+        if (transaction.getDateCreated()==null){
+            throw new BadRequestException(" Wrong data in transaction" + transaction.getId() + ". Can`t be saved");
+        }
+
         for (int i = 0; i < transactions.length; i++) {
             if (transactions[i] != null && transactions[i].equals(transaction)) {
                 throw new BadRequestException("Already exist such transaction" + transaction.getId() + ". Can`t be saved");
@@ -51,11 +55,13 @@ public class TransactionDAO {
             throw new LimitExceeded("Transaction limit per day amount exceed " + transaction.getId() + ". Can`t be saved");
         }
 
+
         if (count > utils.getLimitTransactionsPerDayCount()) {
             throw new LimitExceeded("Transaction limit per day count exceed " + transaction.getId() + ". Can`t be saved");
         }
+
         for (String city : utils.getCities()) {
-            if (city.equals(transaction.getCity())) {
+            if (city.equalsIgnoreCase(transaction.getCity())) {
                 return;
             }
         }
@@ -63,14 +69,32 @@ public class TransactionDAO {
     }
 
     public Transaction[] transactionList() {
-        return transactions;
+        return sort(transactions);
 
     }
+    private Transaction[] sort(Transaction[] array){
+        int count = 0;
+        for (Transaction tr : array) {
+            if (tr != null ) {
+                count++;
+            }
+        }
 
+        Transaction[] resultList = new Transaction[count];
+        int index = 0;
+        for (Transaction tr : array) {
+            if (tr != null ) {
+                resultList[index] = tr;
+                index++;
+            }
+        }
+        return resultList;
+    }
 
     public Transaction[] transactionList(String city) throws Exception {
-        validate(city);
-
+        if (city==null){
+            throw new BadRequestException("Wrong input data");
+        }
         int count = 0;
         for (Transaction tr : transactions) {
             if (tr != null && tr.getCity().equalsIgnoreCase(city)) {
@@ -91,14 +115,7 @@ public class TransactionDAO {
         return resultList;
     }
 
-    private void validate(String city) throws BadRequestException {
-        for (String ct : utils.getCities()) {
-            if (city.equalsIgnoreCase(ct)) {
-                return;
-            }
-        }
-        throw new BadRequestException("No transactions available from this city ");
-    }
+
 
     Transaction[] transactionList(int amount) throws Exception {
         if (amount == 0) {
