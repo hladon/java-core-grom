@@ -11,19 +11,19 @@ public class TransactionDAO {
     private Transaction[] transactions = new Transaction[10];
     private Utils utils = new Utils();
 
-    public Transaction save(Transaction transaction) throws Exception {
+    public Transaction save(Transaction transaction) throws LimitExceeded {
         if (transaction == null) {
-            throw new BadRequestException("Wrong request " + transaction.getId() + ". Can`t be saved");
+            throw new LimitExceeded("Wrong request " + transaction.getId() + ". Can`t be saved");
         }
 
         validate(transaction);
         if (transaction.getDateCreated()==null){
-            throw new BadRequestException(" Wrong data in transaction" + transaction.getId() + ". Can`t be saved");
+            throw new LimitExceeded(" Wrong data in transaction" + transaction.getId() + ". Can`t be saved");
         }
 
         for (int i = 0; i < transactions.length; i++) {
             if (transactions[i] != null && transactions[i].equals(transaction)) {
-                throw new BadRequestException("Already exist such transaction" + transaction.getId() + ". Can`t be saved");
+                throw new LimitExceeded("Already exist such transaction" + transaction.getId() + ". Can`t be saved");
             }
         }
 
@@ -35,7 +35,7 @@ public class TransactionDAO {
             }
         }
 
-        throw new InternalServerException("Base is full " + transaction.getId() + ". Can`t be saved");
+        throw new LimitExceeded("Base is full " + transaction.getId() + ". Can`t be saved");
 
     }
 
