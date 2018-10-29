@@ -63,27 +63,10 @@ public class TransactionDAO {
     }
 
     public Transaction[] transactionList() {
-        return sort(transactions);
+        return transactions;
 
     }
-    private Transaction[] sort(Transaction[] array){
-        int count = 0;
-        for (Transaction tr : array) {
-            if (tr != null ) {
-                count++;
-            }
-        }
 
-        Transaction[] resultList = new Transaction[count];
-        int index = 0;
-        for (Transaction tr : array) {
-            if (tr != null ) {
-                resultList[index] = tr;
-                index++;
-            }
-        }
-        return resultList;
-    }
 
     public Transaction[] transactionList(String city) throws Exception {
         validate(city);
