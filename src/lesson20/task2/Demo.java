@@ -13,9 +13,9 @@ public class Demo {
 
         try{
             test.save(tr1);
-            test.save(tr1);
-            test.save(tr1);
-            test.save(tr1);
+            test.save(tr2);
+            test.save(tr3);
+            test.save(tr4);
             test.transactionList();
             test.transactionList("Kiev");
             test.transactionList(10);

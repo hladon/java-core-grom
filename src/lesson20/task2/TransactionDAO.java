@@ -18,8 +18,15 @@ public class TransactionDAO {
 
         validate(transaction);
         for (int i = 0; i < transactions.length; i++) {
+            if (transactions[i] != null && transactions[i].equals(transaction)) {
+                throw new BadRequestException("Already exist such transaction" + transaction.getId() + ". Can`t be saved");
+            }
+        }
+
+        for (int i = 0; i < transactions.length; i++) {
             if (transactions[i] == null) {
                 transactions[i] = transaction;
+
                 return transactions[i];
             }
         }
@@ -56,14 +63,33 @@ public class TransactionDAO {
     }
 
     public Transaction[] transactionList() {
-        return getTransactionsPerDay(new Date());
+        return sort(transactions);
+
+    }
+    private Transaction[] sort(Transaction[] array){
+        int count = 0;
+        for (Transaction tr : array) {
+            if (tr != null ) {
+                count++;
+            }
+        }
+
+        Transaction[] resultList = new Transaction[count];
+        int index = 0;
+        for (Transaction tr : array) {
+            if (tr != null ) {
+                resultList[index] = tr;
+                index++;
+            }
+        }
+        return resultList;
     }
 
     public Transaction[] transactionList(String city) throws Exception {
         validate(city);
-        Transaction[] list = getTransactionsPerDay(new Date());
+
         int count = 0;
-        for (Transaction tr : list) {
+        for (Transaction tr : transactions) {
             if (tr != null && tr.getCity().equalsIgnoreCase(city)) {
                 count++;
             }
@@ -73,7 +99,7 @@ public class TransactionDAO {
         }
         Transaction[] resultList = new Transaction[count];
         int index = 0;
-        for (Transaction tr : list) {
+        for (Transaction tr : transactions) {
             if (tr != null && tr.getCity().equalsIgnoreCase(city)) {
                 resultList[index] = tr;
                 index++;
@@ -84,7 +110,7 @@ public class TransactionDAO {
 
     private void validate(String city) throws BadRequestException {
         for (String ct : utils.getCities()) {
-            if (city.toUpperCase().equals(ct)) {
+            if (city.equalsIgnoreCase(ct)) {
                 return;
             }
         }
@@ -95,9 +121,9 @@ public class TransactionDAO {
         if (amount == 0) {
             throw new BadRequestException("Such transactions don`t exist ");
         }
-        Transaction[] list = getTransactionsPerDay(new Date());
+
         int count = 0;
-        for (Transaction tr : list) {
+        for (Transaction tr : transactions) {
             if (tr != null && tr.getAmount() == amount) {
                 count++;
             }
@@ -107,7 +133,7 @@ public class TransactionDAO {
         }
         Transaction[] resultList = new Transaction[count];
         int index = 0;
-        for (Transaction tr : list) {
+        for (Transaction tr : transactions) {
             if (tr != null && tr.getAmount() == amount) {
                 resultList[index] = tr;
                 index++;
