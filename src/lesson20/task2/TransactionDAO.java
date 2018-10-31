@@ -3,11 +3,11 @@ package lesson20.task2;
 import lesson20.task2.Exception.BadRequestException;
 import lesson20.task2.Exception.InternalServerException;
 import lesson20.task2.Exception.LimitExceeded;
-
 import java.util.Calendar;
 import java.util.Date;
 
 public class TransactionDAO {
+
     private Transaction[] transactions = new Transaction[10];
     private Utils utils = new Utils();
 
@@ -111,7 +111,7 @@ public class TransactionDAO {
         return resultList;
     }
 
-    Transaction[] transactionList(int amount) throws Exception {
+    Transaction[] transactionList(int amount) {
 
         int count = 0;
         for (Transaction tr : transactions) {
@@ -168,3 +168,4 @@ public class TransactionDAO {
         return result;
     }
 }
+
