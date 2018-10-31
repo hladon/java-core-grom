@@ -15,7 +15,7 @@ public class Controller {
         return transactionDAO.transactionList(city);
     }
 
-    public Transaction[] transactionList(int amount) throws Exception {
+    public Transaction[] transactionList(int amount) {
         return transactionDAO.transactionList(amount);
     }
 }
