@@ -12,6 +12,9 @@ public class TransactionDAO {
     private Utils utils = new Utils();
 
     public Transaction save(Transaction transaction) throws Exception {
+        if (transaction==null){
+            throw new BadRequestException("Cant be saved empty transaction");
+        }
 
         validate(transaction);
 
@@ -50,7 +53,7 @@ public class TransactionDAO {
                     "Transaction limit per day amount exceed " + transaction.getId() + ". Can`t be saved");
         }
 
-        if (count+1 > utils.getLimitTransactionsPerDayCount()) {
+        if (count >= utils.getLimitTransactionsPerDayCount()) {
             throw new LimitExceeded(
                     "Transaction limit per day count exceed " + transaction.getId() + ". Can`t be saved");
         }
