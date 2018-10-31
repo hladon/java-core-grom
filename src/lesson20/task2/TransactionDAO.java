@@ -3,6 +3,7 @@ package lesson20.task2;
 import lesson20.task2.Exception.BadRequestException;
 import lesson20.task2.Exception.InternalServerException;
 import lesson20.task2.Exception.LimitExceeded;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -13,11 +14,14 @@ public class TransactionDAO {
 
     public Transaction save(Transaction transaction) throws Exception {
 
-
+        if (transaction.getDateCreated() == null) {
+            throw new BadRequestException("Wrong transaction" + transaction.getId() + ". Can`t be saved");
+        }
         validate(transaction);
 
+
         for (int i = 0; i < transactions.length; i++) {
-            if (transactions[i] != null &&transactions[i].getId()==transaction.getId() ) {
+            if (transactions[i] != null && transactions[i].getId() == transaction.getId()) {
                 throw new LimitExceeded("Already exist such transaction" + transaction.getId() + ". Can`t be saved");
             }
         }
@@ -46,7 +50,7 @@ public class TransactionDAO {
             count++;
         }
 
-        if (sum  > utils.getLimitTransactionsPerDayAmount()) {
+        if (sum > utils.getLimitTransactionsPerDayAmount()) {
             throw new LimitExceeded(
                     "Transaction limit per day amount exceed " + transaction.getId() + ". Can`t be saved");
         }
