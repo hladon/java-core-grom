@@ -1,11 +1,9 @@
 package lesson20.task2;
 
-import lesson20.task2.Exception.LimitExceeded;
-
 public class Controller {
     private TransactionDAO transactionDAO = new TransactionDAO();
 
-    public Transaction save(Transaction transaction) throws LimitExceeded {
+    public Transaction save(Transaction transaction) throws Exception {
         return transactionDAO.save(transaction);
     }
 
@@ -21,4 +19,3 @@ public class Controller {
         return transactionDAO.transactionList(amount);
     }
 }
-
