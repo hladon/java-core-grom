@@ -15,7 +15,7 @@ public class TransactionDAO {
 		validate(transaction);
 
 		for (int i = 0; i < transactions.length; i++) {
-			if (transactions[i] != null && transactions[i].equals(transaction)) {
+			if (transactions[i] != null &&transactions[i].getId()==transaction.getId() ) {
 				throw new LimitExceeded("Already exist such transaction" + transaction.getId() + ". Can`t be saved");
 			}
 		}
@@ -111,10 +111,7 @@ public class TransactionDAO {
 	}
 
 	Transaction[] transactionList(int amount) throws Exception {
-		if (amount == 0) {
-			throw new BadRequestException("Such transactions don`t exist ");
-		}
-
+		
 		int count = 0;
 		for (Transaction tr : transactions) {
 			if (tr != null && tr.getAmount() == amount) {
