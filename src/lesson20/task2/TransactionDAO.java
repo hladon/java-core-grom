@@ -90,19 +90,15 @@ public class TransactionDAO {
         return resultList;
     }
 
-    public Transaction[] transactionList(String city) throws Exception {
-        if (city == null) {
-            throw new BadRequestException("Wrong input data");
-        }
+    public Transaction[] transactionList(String city) {
+        
         int count = 0;
         for (Transaction tr : transactions) {
             if (tr != null && tr.getCity().equalsIgnoreCase(city)) {
                 count++;
             }
         }
-        if (count == 0) {
-            throw new BadRequestException("No transactions from this city");
-        }
+        
         Transaction[] resultList = new Transaction[count];
         int index = 0;
         for (Transaction tr : transactions) {
