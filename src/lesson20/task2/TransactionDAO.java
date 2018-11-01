@@ -32,7 +32,7 @@ public class TransactionDAO {
             }
         }
 
-        throw new LimitExceeded("Base is full " + transaction.getId() + ". Can`t be saved");
+        throw new InternalServerException("Base is full " + transaction.getId() + ". Can`t be saved");
 
     }
 
