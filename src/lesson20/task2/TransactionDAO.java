@@ -19,7 +19,7 @@ public class TransactionDAO {
 
 
         for (Transaction tr: transactions) {
-            if (tr != null && tr.getId() == transaction.getId()) {
+            if (tr != null && tr.equals(transaction)) {
                 throw new LimitExceeded("Already exist such transaction" + transaction.getId() + ". Can`t be saved");
             }
         }
