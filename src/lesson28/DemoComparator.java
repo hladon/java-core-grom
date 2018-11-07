@@ -5,10 +5,10 @@ import java.util.*;
 public class DemoComparator {
     public static void main(String[] args) {
 
-        Capability capability2=new Capability(1005,"test","rrrr",false, new Date());
-        Capability capability4=new Capability(900,"test","rrrr",false, new Date());
-        Capability capability1=new Capability(1001,"test","rrrr",true, new Date());
-        Capability capability3=new Capability(900,"test","rrrr",true, new Date());
+        Capability capability2=new Capability(1005,"test","arrrr",false, new Date());
+        Capability capability4=new Capability(900,"test","brrrr",false, new Date());
+        Capability capability1=new Capability(1001,"test","crrrr",true, new Date());
+        Capability capability3=new Capability(900,"btest","drrrr",true, new Date());
 
         ArrayList<Capability> capabilities= new ArrayList<>();
         capabilities.add(capability1);
@@ -16,17 +16,9 @@ public class DemoComparator {
         capabilities.add(capability3);
         capabilities.add(capability4);
         System.out.println(capabilities);
-        capabilities.sort(new IsActiveComparator());
+        capabilities.sort(new FullComparator());
         System.out.println(capabilities);
 
         }
-    Comparator<Capability> comparator=new Comparator<Capability>(){
-        @Override
-        public int compare(Capability o1, Capability o2) {
-            if (!o1.getChannelName().equals(o2)){
-                return o1.getChannelName().compareTo(o2.getChannelName());
-                //TODO
-            }
-        }
-    };
+
 }
