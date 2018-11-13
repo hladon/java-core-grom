@@ -1,22 +1,32 @@
 package lesson30.task2;
 
+
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
 public class DepartmentDAO {
-    public static Set<Customer> customers=new HashSet<>();
+	public static Set<Department> departments = new HashSet<>();
+	ArrayList findep = new ArrayList();
+	ArrayList devdep = new ArrayList();
+	ArrayList saldep = new ArrayList();
 
-    Department cust1=new Department(DepartmentType.DEVELOPING,new HashSet());
-    Customer cust2=new Customer("cast2","China",2100);
-    Customer cust3=new Customer("cast3","China",2200);
-    Customer cust4=new Customer("cast4","China",2300);
-    Customer cust5=new Customer("cast5","China",2400);
-    {
-        customers.add(cust1);
-        customers.add(cust2);
-        customers.add(cust3);
-        customers.add(cust4);
-        customers.add(cust5);
+	{
+		findep.add(EmployeeDAO.employee1);
+		findep.add(EmployeeDAO.employee4);
+		devdep.add(EmployeeDAO.employee2);
+		devdep.add(EmployeeDAO.employee3);
+		devdep.add(EmployeeDAO.employee5);
+		devdep.add(EmployeeDAO.employee7);
+		saldep.add(EmployeeDAO.employee6);
+	}
+	Department finance = new Department(DepartmentType.FINANCE, findep);
+	Department developing = new Department(DepartmentType.DEVELOPING, devdep);
+	Department sales = new Department(DepartmentType.SALES, saldep);
+	{
+		departments.add(finance);
+		departments.add(developing);
+		departments.add(sales);
 
-    }
+	}
 }
