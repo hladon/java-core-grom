@@ -12,12 +12,13 @@ public class ProjectDAO {
     static Project project4=new Project("Citrus",CustomerDAO.cust4);
     static Project project5=new Project("HotUA",CustomerDAO.cust5);
 
-    {
+     {
         projects.add(project1);
         projects.add(project2);
         projects.add(project3);
         projects.add(project4);
         projects.add(project5);
-
     }
+
+
 }

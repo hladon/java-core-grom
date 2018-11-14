@@ -4,19 +4,25 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class DepartmentDAO {
-    public static Set<Customer> customers=new HashSet<>();
+    public static Set<Employee> financeDep=new HashSet<>();
+    public static Set<Employee> developingDep=new HashSet<>();
+    public static Set<Employee> salesDep=new HashSet<>();
 
-    Department cust1=new Department(DepartmentType.DEVELOPING,new HashSet());
-    Customer cust2=new Customer("cast2","China",2100);
-    Customer cust3=new Customer("cast3","China",2200);
-    Customer cust4=new Customer("cast4","China",2300);
-    Customer cust5=new Customer("cast5","China",2400);
-    {
-        customers.add(cust1);
-        customers.add(cust2);
-        customers.add(cust3);
-        customers.add(cust4);
-        customers.add(cust5);
+    Department finance=new Department(DepartmentType.FINANCE,financeDep);
+    Department developing=new Department(DepartmentType.DEVELOPING,developingDep);
+    Department sales=new Department(DepartmentType.SALES,salesDep);
+
+    public DepartmentDAO() {
+        EmployeeDAO employeeDAO=new EmployeeDAO();
+        financeDep.add(EmployeeDAO.employee1);
+        financeDep.add(EmployeeDAO.employee4);
+        developingDep.add(EmployeeDAO.employee2);
+        developingDep.add(EmployeeDAO.employee3);
+        developingDep.add(EmployeeDAO.employee5);
+        developingDep.add(EmployeeDAO.employee6);
+        salesDep.add(EmployeeDAO.employee7);
 
     }
+
+
 }

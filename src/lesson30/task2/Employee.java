@@ -41,7 +41,7 @@ public class Employee {
         return department;
     }
 
-    public Collection getProjects() {
+    public Collection<Project> getProjects() {
         return projects;
     }
 }
