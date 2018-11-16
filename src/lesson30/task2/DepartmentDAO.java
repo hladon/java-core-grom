@@ -1,29 +1,21 @@
 package lesson30.task2;
 
-import java.util.HashSet;
+
+import java.util.List;
 import java.util.Set;
 
+import static java.util.Arrays.asList;
+
 public class DepartmentDAO {
-    public  Set<Employee> financeDep=new HashSet<>();
-    public  Set<Employee> developingDep=new HashSet<>();
-    public  Set<Employee> salesDep=new HashSet<>();
 
+    public static List<Employee> financeDep=asList(EmployeeDAO.employee1,EmployeeDAO.employee4);
+    public static List<Employee> developingDep=asList(EmployeeDAO.employee2,EmployeeDAO.employee3,EmployeeDAO.employee5,EmployeeDAO.employee6);
+    public static List<Employee> salesDep=asList(EmployeeDAO.employee7);
 
-    public Department finance=new Department(DepartmentType.FINANCE,financeDep);
-    public Department developing=new Department(DepartmentType.DEVELOPING,developingDep);
-    public Department sales=new Department(DepartmentType.SALES,salesDep);
+    public  static Department finance=new Department(DepartmentType.FINANCE,financeDep);
+    public  static Department developing=new Department(DepartmentType.DEVELOPING,developingDep);
+    public  static Department sales=new Department(DepartmentType.SALES,salesDep);
 
-    public DepartmentDAO() {
-         EmployeeDAO employeeDAO=new EmployeeDAO();
-        financeDep.add(employeeDAO.employee1);
-        financeDep.add(employeeDAO.employee4);
-        developingDep.add(employeeDAO.employee2);
-        developingDep.add(employeeDAO.employee3);
-        developingDep.add(employeeDAO.employee5);
-        developingDep.add(employeeDAO.employee6);
-        salesDep.add(employeeDAO.employee7);
-
-    }
 
 
 }
