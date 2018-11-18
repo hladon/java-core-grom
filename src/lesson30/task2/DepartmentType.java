@@ -1,7 +1,7 @@
 package lesson30.task2;
 
-public enum  DepartmentType {
+public enum DepartmentType {
     FINANCE,
     DEVELOPING,
     SALES,
-    }
+}

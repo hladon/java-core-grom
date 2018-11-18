@@ -1,6 +1,6 @@
 package lesson30.task2;
 
-public enum  Position {
+public enum Position {
     TEAM_LEAD,
     DEVELOPER,
     FINANCE,

@@ -12,8 +12,8 @@ public class EmployeeDAO {
     public static List<Project> employee3Projecs=asList(ProjectDAO.project3,ProjectDAO.project4,ProjectDAO.project5);
     public static List<Project> employee4Projecs=asList(ProjectDAO.project4,ProjectDAO.project5,ProjectDAO.project1);
     public static List<Project> employee5Projecs=asList(ProjectDAO.project5,ProjectDAO.project1,ProjectDAO.project3);
-    public static List<Project> employee6Projecs=asList(ProjectDAO.project1,ProjectDAO.project2,ProjectDAO.project3);
-    public static List<Project> employee7Projecs=asList(ProjectDAO.project2,ProjectDAO.project3,ProjectDAO.project4);
+    public static List<Project> employee6Projecs=asList();
+    public static List<Project> employee7Projecs=asList(ProjectDAO.project1,ProjectDAO.project2,ProjectDAO.project3);
 
     public static  Employee employee1 = new Employee("Derek", "Smith", new Date(28 / 10 / 2011), Position.ANALYST, DepartmentDAO.finance, employee1Projecs);
     public static  Employee employee2 = new Employee("Boris", "Bobko", new Date(28 / 10 / 2011), Position.DESIGNER, DepartmentDAO.developing, employee2Projecs);
