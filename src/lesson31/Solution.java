@@ -1,15 +1,13 @@
 package lesson31;
 
-import com.sun.xml.internal.ws.util.StringUtils;
+
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Solution {
     public Map countSymbols(String text) {
-        Map<Character, Integer> symbols = new HashMap<>();
-
-        int count = 0;
+        Map<Character, Integer> map = new HashMap<>();
         int i = 0;
         char ch ;
         String stringCh ;
@@ -17,27 +15,23 @@ public class Solution {
             ch = text.charAt(i);
             stringCh = Character.toString(ch);
             if (Character.isLetter(ch)) {
-                count = text.length() - text.replace(stringCh, "").length();
-                symbols.put(ch, count);
+                map=adding(map,stringCh);
             }
             i++;
         }
-        return symbols;
+        return map;
     }
 
     public Map words(String text) {
-        Map<String, Integer> symbols = new HashMap<>();
+        Map<String, Integer> map = new HashMap<>();
         String[] words = text.trim().split(" ");
-        int count = 1;
-        int i = 0;
-        while (i < text.length()) {
-
-            if (isWord(words[i])) {
-
-            }
-            i++;
+        int count;
+        for (String word : words) {
+            if (!isWord(word))
+                continue;
+            map=adding(map,word);
         }
-        return symbols;
+        return map;
     }
 
     private boolean isWord(String word) {
@@ -45,6 +39,16 @@ public class Solution {
             return word.replaceAll("[а-яА-Яa-zA-Z ]", "").length() == 0;
         }
         return false;
+    }
+    private Map adding (Map map, String text){
+        int count;
+        if (map.containsKey(text)) {
+            count = (Integer) map.get(text);
+            map.put(text, count + 1);
+        } else {
+            map.put(text, 1);
+        }
+        return map;
     }
 
 }

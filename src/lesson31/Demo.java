@@ -11,5 +11,6 @@ public class Demo {
 
         System.out.println(solution.words("my my next next next is  word"));
         System.out.println(solution.words(" vv zz kk mm mm ll th th th ht "));
+        System.out.println(solution.words(" 324n lkm lkm 0)435 456 jldfgjl k k k  "));
     }
 }
