@@ -1,26 +1,26 @@
 package lesson31;
 
+import com.sun.xml.internal.ws.util.StringUtils;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class Solution {
     public Map countSymbols(String text) {
         Map<Character, Integer> symbols = new HashMap<>();
-        char[] characters = text.toCharArray();
-        int count = 1;
+
+        int count = 0;
         int i = 0;
-        while (i < characters.length) {
-            if (Character.isLetter(characters[i])) {
-                for (int k = i + 1; k < characters.length; k++) {
-                    if (characters[i] == characters[k]) {
-                        characters[k] = ' ';
-                        count++;
-                    }
-                }
-                symbols.put(characters[i], count);
+        char ch ;
+        String stringCh ;
+        while (i < text.length()) {
+            ch = text.charAt(i);
+            stringCh = Character.toString(ch);
+            if (Character.isLetter(ch)) {
+                count = text.length() - text.replace(stringCh, "").length();
+                symbols.put(ch, count);
             }
             i++;
-            count = 1;
         }
         return symbols;
     }
@@ -30,24 +30,19 @@ public class Solution {
         String[] words = text.trim().split(" ");
         int count = 1;
         int i = 0;
-        while (i < words.length) {
-            if (isWord(text) ) {
-                for (int k = i + 1; k < words.length; k++) {
-                    if (words[i] != null && words[i].equals(words[k])) {
-                        words[k] = null;
-                        count++;
-                    }
-                }
-                symbols.put(words[i], count);
+        while (i < text.length()) {
+
+            if (isWord(words[i])) {
+
             }
             i++;
-            count = 1;
         }
         return symbols;
     }
-    private boolean isWord(String word){
-        if (word!=null&& word.length()>1){
-            return word.replaceAll("[а-яА-Яa-zA-Z ]","").length()==0;
+
+    private boolean isWord(String word) {
+        if (word != null && word.length() > 1) {
+            return word.replaceAll("[а-яА-Яa-zA-Z ]", "").length() == 0;
         }
         return false;
     }
