@@ -5,23 +5,23 @@ public class Demo {
         Controller controller = new Controller();
         EmployeeDAO employeeDAO = new EmployeeDAO();
 
-        System.out.println(controller.employeesByProject("amazon"));
+        System.out.println(Controller.employeesByProject("amazon"));
 
-        System.out.println(controller.projectsByEmployee(EmployeeDAO.employee1));
+        System.out.println(Controller.projectsByEmployee(EmployeeDAO.getEmployee1()));
 
-        System.out.println(controller.employeesByDepartmentWithoutProject(DepartmentType.FINANCE));
+        System.out.println(Controller.employeesByDepartmentWithoutProject(DepartmentType.FINANCE));
 
-        System.out.println(controller.employeesWithoutProject());
+        System.out.println(Controller.employeesWithoutProject());
 
-        System.out.println(controller.employeesByTeemLead(EmployeeDAO.employee7));
+        System.out.println(Controller.employeesByTeemLead(EmployeeDAO.getEmployee7()));
 
-        System.out.println(controller.teamLeadsByEmployee(EmployeeDAO.employee5));
+        System.out.println(Controller.teamLeadsByEmployee(EmployeeDAO.getEmployee5()));
 
-        System.out.println(controller.employeesByProjectEmployee(EmployeeDAO.employee5));
+        System.out.println(Controller.employeesByProjectEmployee(EmployeeDAO.getEmployee5()));
 
-        System.out.println(controller.projectsByCustomer(CustomerDAO.cust1));
+        System.out.println(Controller.projectsByCustomer(CustomerDAO.cust1));
 
-        System.out.println(controller.employeesByCustomerProjects(CustomerDAO.cust1));
+        System.out.println(Controller.employeesByCustomerProjects(CustomerDAO.cust1));
 
     }
 }

@@ -9,14 +9,12 @@ public class Solution {
         InputStreamReader reader = new InputStreamReader(System.in);
         BufferedReader bufferedReader = new BufferedReader(reader);
         int attempt = 3;
-        int numbers = 10;
         int sum = 0;
-        int number = 0;
-        while (numbers != 0) {
+        String line;
+        while (attempt> 0) {
             try {
-                number = Integer.parseInt(bufferedReader.readLine());
-                sum += number;
-                numbers--;
+                line=bufferedReader.readLine();
+                return lineToNumbers(line);
             } catch (Exception e) {
                 if (attempt == 0) {
                     System.out.println("Your numbers are wrong. Numbers of attempts exceeded");
@@ -28,6 +26,20 @@ public class Solution {
 
         }
 
+        return sum;
+    }
+
+    private static int lineToNumbers  (String line) throws NumberFormatException{
+        String[] stringsNumbers =line.trim().split(" ");
+        int number = 0;
+        int sum = 0;
+        for (int i=0; i<10;i++){
+            number =Integer.parseInt(stringsNumbers[i]);
+            if (number>100){
+                throw new   NumberFormatException();
+            }
+            sum +=number;
+        }
         return sum;
     }
 }
