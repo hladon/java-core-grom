@@ -4,13 +4,9 @@ import org.apache.commons.io.IOUtils;
 
 import java.io.*;
 
-public class ReadFile {
-    public static void main(String[] args) {
-        readFile("C:/Users/Vitaliy/Desktop/test.txt");
-        writeFile("C:/Users/Vitaliy/Desktop/test1.txt");
-    }
+public class ReadWriteFile {
 
-    private static void readFile(String path){
+    public static void readFile(String path){
         FileReader reader;
         try {
             reader=new FileReader(path);
@@ -31,7 +27,7 @@ public class ReadFile {
             IOUtils.closeQuietly(reader);
         }
     }
-    private static void writeFile(String path){
+    public static void writeFile(String path){
         FileWriter writer=null;
         BufferedWriter bufferedWriter=null;
         try {
