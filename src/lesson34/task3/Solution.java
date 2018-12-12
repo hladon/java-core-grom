@@ -1,24 +1,36 @@
-package lesson34.task2;
+package lesson34.task3;
 
 
 
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import java.io.*;
 
 public class Solution {
+    public static void copyFileContent(String fileFromPath,String fileToPath) throws Exception{
+        validate(fileFromPath);
+        writeToFile(fileToPath,readFromFile(fileFromPath));
 
-    public static void TransferSentences(String fileFromPath,String fileToPath,String word) throws Exception{
-        validate(fileFromPath,fileToPath);
-        writeToFile(fileToPath,splitText(readFromFile(fileFromPath),word,fileFromPath));
     }
+    public static void copyFileContentApacheIO(String fileFromPath,String fileToPath) throws Exception{
+        File fileFrom=new File(fileFromPath);
+        String fileToCreate=fileToPath+"/fileTo.txt";
+        File fileTo =new File(fileToCreate);
+        FileUtils.writeStringToFile(fileTo,FileUtils.readFileToString(fileFrom),"UTF-8");
+
+    }
+
     private static StringBuffer readFromFile(String path){
         StringBuffer res =new StringBuffer();
         try (BufferedReader br=new BufferedReader(new FileReader(path))) {
             String line;
+
             while ((line = br.readLine()) != null) {
                 res.append(line);
-                res.append(" ");
+                res.append("\n");
             }
-
+            res.replace(res.length()-1,res.length(),"");
         }catch (FileNotFoundException e){
             System.err.println("File does not exist");
         }
@@ -27,61 +39,27 @@ public class Solution {
         }
         return res;
     }
-    private static StringBuffer splitText(StringBuffer text,String checkedWord,String pathToOriginFile){
-        StringBuffer textToTransfer = new StringBuffer();
-        StringBuffer textToLeave = new StringBuffer();
-        String line=text.toString();
-        String[] sentencess=line.split(".");
-        for (String sentences: sentencess){
-            if (checkSentences(sentences,checkedWord)){
-                textToTransfer.append(sentences);
-                textToTransfer.append(".");
-            }
-            textToLeave.append(sentences);
-            textToLeave.append(".");
-        }
-        try(BufferedWriter bufferedWriter=new BufferedWriter(new FileWriter(pathToOriginFile,true))){
-            bufferedWriter.write(String.valueOf(textToLeave));
-        }catch (IOException e){
-            System.err.println("Can`t write to file");
-        }
-        return textToTransfer;
-    }
-    private static boolean checkSentences(String sentences,String checkedWord){
-        if (sentences.length()<10){
-            return false;
-        }
-        String[] words=sentences.split(" ");
-        for (String word: words){
-            if (word.equals(checkedWord))
-                return true;
-        }
-        return false;
-
-    }
-
     private static void writeToFile(String path, StringBuffer contentToWrite){
-        try(BufferedWriter bufferedWriter=new BufferedWriter(new FileWriter(path,true))){
+        String fileToCreate=path+"/fileTo.txt";
+        File fileTo =new File(fileToCreate);
+        try {
+            fileTo.createNewFile();
+        }catch (IOException e){
+            System.err.println("New file can`t be created!");
+        }
+        try(BufferedWriter bufferedWriter=new BufferedWriter(new FileWriter(fileToCreate,true))){
             bufferedWriter.append(contentToWrite);
         }catch (IOException e){
             System.err.println("Can`t write to file");
         }
     }
-    private static void validate (String fileFromPath,String fileToPath) throws Exception{
+    private static void validate (String fileFromPath) throws Exception{
         File fileFrom=new File(fileFromPath);
-        File fileTo=new File(fileToPath);
         if (!fileFrom.exists()){
             throw new FileNotFoundException("File"+ fileFrom+" does not exist");
-        }
-        if (!fileTo.exists()){
-            throw new FileNotFoundException("File"+fileTo+" does not exist");
         }
         if (!fileFrom.canRead()){
             throw new FileNotFoundException("File"+ fileFrom+" does not have permissions to be read");
         }
-        if (!fileTo.canRead()){
-            throw new FileNotFoundException("File"+ fileTo+" does not have permissions to be read");
-        }
     }
-
 }
