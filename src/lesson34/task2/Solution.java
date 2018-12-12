@@ -8,8 +8,7 @@ public class Solution {
 
     public static void TransferSentences(String fileFromPath,String fileToPath,String word) throws Exception{
         validate(fileFromPath,fileToPath);
-        writeToFile(fileToPath,readFromFile(fileFromPath));
-        cleanFile(fileFromPath);
+        writeToFile(fileToPath,splitText(readFromFile(fileFromPath),word,fileFromPath));
     }
     private static StringBuffer readFromFile(String path){
         StringBuffer res =new StringBuffer();
@@ -28,15 +27,25 @@ public class Solution {
         }
         return res;
     }
-    private static void splitText(StringBuffer text,String checkedWord){
+    private static StringBuffer splitText(StringBuffer text,String checkedWord,String pathToOriginFile){
+        StringBuffer textToTransfer = new StringBuffer();
+        StringBuffer textToLeave = new StringBuffer();
         String line=text.toString();
         String[] sentencess=line.split(".");
         for (String sentences: sentencess){
             if (checkSentences(sentences,checkedWord)){
-
+                textToTransfer.append(sentences);
+                textToTransfer.append(".");
             }
+            textToLeave.append(sentences);
+            textToLeave.append(".");
         }
-
+        try(BufferedWriter bufferedWriter=new BufferedWriter(new FileWriter(pathToOriginFile,true))){
+            bufferedWriter.write(String.valueOf(textToLeave));
+        }catch (IOException e){
+            System.err.println("Can`t write to file");
+        }
+        return textToTransfer;
     }
     private static boolean checkSentences(String sentences,String checkedWord){
         if (sentences.length()<10){
@@ -72,13 +81,6 @@ public class Solution {
         }
         if (!fileTo.canRead()){
             throw new FileNotFoundException("File"+ fileTo+" does not have permissions to be read");
-        }
-    }
-    private static void cleanFile(String path){
-        try(BufferedWriter bufferedWriter=new BufferedWriter(new FileWriter(path))){
-            bufferedWriter.write("");
-        }catch (IOException e){
-            System.err.println("Can`t clean file");
         }
     }
 }
