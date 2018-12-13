@@ -9,7 +9,6 @@ public class Solution {
     public static void transferSentences(String fileFromPath,String fileToPath,String word) throws Exception{
         validate(fileFromPath,fileToPath);
         StringBuffer transfer=splitText(readFromFile(fileFromPath),word,fileFromPath);
-        System.out.println(transfer.toString());
         writeToFile(fileToPath,transfer);
     }
     private static StringBuffer readFromFile(String path){
@@ -34,19 +33,17 @@ public class Solution {
         StringBuffer textToTransfer = new StringBuffer();
         StringBuffer textToLeave = new StringBuffer();
         String line=text.toString();
-        String[] sentencess=line.split("/.");
+        String[] sentencess=line.split("[.]");
 
         for (String sentences: sentencess){
-            System.out.println(sentences);
             if (checkSentences(sentences,checkedWord)){
-                textToTransfer.append(sentences);
-                textToTransfer.append("/.");
+                textToTransfer.append(sentences+".");
             }
-            textToLeave.append(sentences);
-            textToLeave.append("/.");
+            else{
+                textToLeave.append(sentences+".");
+            }
         }
-        System.out.println("Done");
-        try(BufferedWriter bufferedWriter=new BufferedWriter(new FileWriter(pathToOriginFile,true))){
+        try(BufferedWriter bufferedWriter=new BufferedWriter(new FileWriter(pathToOriginFile,false))){
             bufferedWriter.write(String.valueOf(textToLeave));
         }catch (IOException e){
             System.err.println("Can`t write to file");
@@ -60,7 +57,7 @@ public class Solution {
         }
         String[] words=sentences.split(" ");
         for (String word: words){
-            if (word.equals(checkedWord))
+            if (word.equalsIgnoreCase(checkedWord))
                 return true;
         }
         return false;
