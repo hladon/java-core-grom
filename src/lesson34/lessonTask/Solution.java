@@ -1,4 +1,4 @@
-package lesson34.tasklesson;
+package lesson34.lessonTask;
 
 
 
@@ -10,6 +10,12 @@ public class Solution {
        writeToFile(fileToPath,readFromFile(fileFromPath));
 
     }
+    public static void copyFileContentApacheIO(String fileFromPath,String fileToPath) throws Exception{
+        validate(fileFromPath,fileToPath);
+        writeToFile(fileToPath,readFromFile(fileFromPath));
+
+    }
+
     private static StringBuffer readFromFile(String path){
         StringBuffer res =new StringBuffer();
         try (BufferedReader br=new BufferedReader(new FileReader(path))) {
