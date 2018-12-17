@@ -1,8 +1,11 @@
 package lesson36;
 
+import java.util.regex.Pattern;
+
 public class Demo {
     public static void main(String[] args) {
-        System.out.println(HotelService.findHotelByCity("Kiev").toString());
+        Pattern pattern=Pattern.compile("[\\d+,\\w+]");
+        System.out.println(Repository.checkDataFromRepository(pattern,"111"));
 
     }
 }

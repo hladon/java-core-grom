@@ -4,13 +4,12 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Repository {
-    public static List<Hotel> getHotels(){
-        return null;
-    }
 
-    public static String[] getList(String path){
+    public static String[] getListFromRepository(String path){
 
         StringBuffer text=new StringBuffer();
         String line;
@@ -23,6 +22,11 @@ public class Repository {
             System.err.println("File "+path+" are missing");
         }
         return String.valueOf(text).split("\n");
+    }
+
+    public static boolean checkDataFromRepository(Pattern pattern, String text){
+        Matcher matcher=pattern.matcher(text);
+        return matcher!=null;
     }
 
 
