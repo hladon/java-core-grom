@@ -1,4 +1,6 @@
-package lesson36;
+package lesson36.model;
+
+import lesson36.model.Hotel;
 
 import java.util.Date;
 

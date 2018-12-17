@@ -1,24 +1,36 @@
 package lesson36;
 
+import lesson36.Exceptions.UserNotLogged;
+import lesson36.model.Filter;
+import lesson36.model.User;
+
 import java.util.Collection;
 import java.util.Set;
 
 public class Controler {
     private static User logedUser=null;
-    public static Set findHotelByName(String name){
+
+    public  Set findHotelByName(String name)throws Exception{
+        if (logedUser==null)
+            throw new UserNotLogged();
         return HotelService.findHotelByName(name);
     }
-    public static Set findHotelByCity(String city){
+
+    public  Set findHotelByCity(String city)throws Exception{
+        if (logedUser==null)
+            throw new UserNotLogged();
         return HotelService.findHotelByCity(city);
     }
-    public static Collection findRooms(Filter filter){
+
+    public  Collection findRooms(Filter filter){
         return null;
     }
-    public static void login(String userName,String password){
+
+    public  void login(String userName,String password) throws Exception{
         logedUser=UserService.login(userName,password);
     }
 
-    public static void logout(){
+    public void logout(){
         logedUser=null;
     }
 

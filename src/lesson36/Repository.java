@@ -1,9 +1,10 @@
 package lesson36;
 
+import lesson36.Exceptions.RepositoryDamaged;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,9 +25,10 @@ public class Repository {
         return String.valueOf(text).split("\n");
     }
 
-    public static boolean checkDataFromRepository(Pattern pattern, String text){
+    public static void checkDataFromRepository(Pattern pattern, String text, String path) throws RepositoryDamaged {
         Matcher matcher=pattern.matcher(text);
-        return matcher!=null;
+               if (!matcher.matches())
+                   throw new RepositoryDamaged("Repository " + path+" are damaged");
     }
 
 
