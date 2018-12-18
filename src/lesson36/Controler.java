@@ -53,8 +53,8 @@ public class Controler {
         if (logedUser==null)
             throw new UserNotLogged();
         if (logedUser.getType().equals(UserType.ADMIN)) {
-            HotelService.addHotel(hotel);
-            return hotel;
+
+            return HotelService.addHotel(hotel);
         }
         throw new WrongUserType();
     }
@@ -63,9 +63,14 @@ public class Controler {
         //TODO;
     }
 
-    public Room addRoom(Room room){
-        //TODO;
-        return null;
+    public Room addRoom(Room room)throws Exception{
+        if (logedUser==null)
+            throw new UserNotLogged();
+        if (logedUser.getType().equals(UserType.ADMIN)) {
+
+            return RoomService.addRoom(room);
+        }
+        throw new WrongUserType();
     }
 
     public void deleteRoom(long roomId){
