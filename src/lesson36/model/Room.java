@@ -5,11 +5,11 @@ import lesson36.model.Hotel;
 import java.util.Date;
 
 public class Room {
-    long id;
-    int numberOfGuests;
-    double price;
-    boolean breakfastIncluded;
-    boolean petsAllowed;
-    Date dateAvailableFrom;
-    Hotel hotel;
+    private long id;
+    private int numberOfGuests;
+    private double price;
+    private boolean breakfastIncluded;
+    private boolean petsAllowed;
+    private Date dateAvailableFrom;
+    private Hotel hotel;
 }

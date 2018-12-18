@@ -2,9 +2,7 @@ package lesson36;
 
 import lesson36.Exceptions.RepositoryDamaged;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,6 +27,17 @@ public class Repository {
         Matcher matcher=pattern.matcher(text);
                if (!matcher.matches())
                    throw new RepositoryDamaged("Repository " + path+" are damaged");
+    }
+
+    public static String add (String repositoryAddres, String text){
+        try (BufferedWriter br=new BufferedWriter(new FileWriter(repositoryAddres,true))){
+            br.append(text);
+            br.append("\n");
+            return text;
+        }catch (Exception e){
+            System.err.println("Repository in "+repositoryAddres+" not found!");
+        }
+        return null;
     }
 
 

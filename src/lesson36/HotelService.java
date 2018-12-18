@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 public class HotelService {
-    private static Pattern pattern=Pattern.compile("\\d+,\\w+,\\w+,\\w+,\\w+,");
+    private static Pattern pattern=Pattern.compile("\\d+,\\w+,\\w+,\\w+,\\w+");
     private static String repositoryLocation="D:\\java-core-project\\src\\lesson36\\repository\\hotelRepository.txt";
 
     public static Set findHotelByName(String name)throws RepositoryDamaged {
@@ -28,6 +28,11 @@ public class HotelService {
                 list.add(new Hotel(Long.valueOf(values[0]),values[1],values[2],values[3],values[4])) ;
         }
         return list;
+    }
+
+    public static Hotel addHotel (Hotel hotel){
+        Repository.add(repositoryLocation,hotel.toString());
+        return hotel;
     }
 
 

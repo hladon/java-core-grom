@@ -1,7 +1,10 @@
 package lesson36;
 
 import lesson36.Exceptions.UserNotLogged;
+import lesson36.Exceptions.WrongUserType;
 import lesson36.model.Filter;
+import lesson36.model.Hotel;
+import lesson36.model.Room;
 import lesson36.model.User;
 
 import java.util.Collection;
@@ -23,7 +26,19 @@ public class Controler {
     }
 
     public  Collection findRooms(Filter filter){
+        // TODO;
         return null;
+    }
+    public void bookRoom(long roomId, long userId, long hotelId){
+        //TODO;
+    }
+    public void cancelReservation(long roomId,long userId){
+        //TODO;
+    }
+
+    public User registerUser(User user){
+        return UserService.registerUser(user);
+
     }
 
     public  void login(String userName,String password) throws Exception{
@@ -32,6 +47,29 @@ public class Controler {
 
     public void logout(){
         logedUser=null;
+    }
+
+    public Hotel addHotel(Hotel hotel)throws Exception{
+        if (logedUser==null)
+            throw new UserNotLogged();
+        if (logedUser.getType().equals(UserType.ADMIN)) {
+            HotelService.addHotel(hotel);
+            return hotel;
+        }
+        throw new WrongUserType();
+    }
+
+    public void deleteHotel(long hotelId){
+        //TODO;
+    }
+
+    public Room addRoom(Room room){
+        //TODO;
+        return null;
+    }
+
+    public void deleteRoom(long roomId){
+        //TODO;
     }
 
 }

@@ -6,10 +6,18 @@ public class Filter {
     private String country;
     private String city;
     private int numberOfGuests;
-    private double price;
     private boolean breakfastIncluded;
     private boolean petsAllowed;
     private Date dateAvailableFrom;
+
+    public Filter(String country, String city, int numberOfGuests, boolean breakfastIncluded, boolean petsAllowed, Date dateAvailableFrom) {
+        this.country = country;
+        this.city = city;
+        this.numberOfGuests = numberOfGuests;
+        this.breakfastIncluded = breakfastIncluded;
+        this.petsAllowed = petsAllowed;
+        this.dateAvailableFrom = dateAvailableFrom;
+    }
 
     public String getCountry() {
         return country;
@@ -33,14 +41,6 @@ public class Filter {
 
     public void setNumberOfGuests(int numberOfGuests) {
         this.numberOfGuests = numberOfGuests;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     public boolean isBreakfastIncluded() {

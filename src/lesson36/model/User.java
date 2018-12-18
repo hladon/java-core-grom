@@ -11,6 +11,12 @@ public class User {
     private String country;
     private UserType type;
 
+    @Override
+    public String toString() {
+        return id +","+ userName + ","+ password + "," + country + "," +type.toString();
+
+    }
+
     public User(long id, String userName, String password, String country, UserType type) {
         this.id = id;
         this.userName = userName;
@@ -31,5 +37,25 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(userName, password);
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public UserType getType() {
+        return type;
     }
 }

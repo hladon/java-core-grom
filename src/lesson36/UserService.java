@@ -10,8 +10,8 @@ public class UserService {
     private static String repositoryLocation="D:\\java-core-project\\src\\lesson36\\repository\\userRepository.txt";
 
     public static User registerUser(User user){
-        //TODO
-        return null;
+        Repository.add(repositoryLocation,user.toString());
+        return user;
     }
     public static User login(String userName,String password) throws RepositoryDamaged {
         String[] list=Repository.getListFromRepository(repositoryLocation);
