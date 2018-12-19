@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 public class HotelService {
-    private static Pattern pattern=Pattern.compile("\\d+,\\w+,\\w+,\\w+,\\w+");
+    private static Pattern rightDataStructure=Pattern.compile("\\d+,\\w+,\\w+,\\w+,\\w+");
     private static String repositoryLocation="D:\\java-core-project\\src\\lesson36\\repository\\hotelRepository.txt";
 
     public static Set findHotelByName(String name)throws RepositoryDamaged {
@@ -18,11 +18,10 @@ public class HotelService {
         return find(city,3);
     }
     private static Set find(String name,int number)throws RepositoryDamaged{
-        String[] textList= Repository.getListFromRepository(repositoryLocation);
+        String[] textList= Repository.getListFromRepository(repositoryLocation,rightDataStructure);
         String[] values;
         Set <Hotel> list=new HashSet<>();
         for (String line: textList){
-            Repository.checkDataFromRepository(pattern,line,repositoryLocation);
             values=line.split("[,]");
             if (values[number].equals(name))
                 list.add(new Hotel(Long.valueOf(values[0]),values[1],values[2],values[3],values[4])) ;
@@ -34,6 +33,8 @@ public class HotelService {
         Repository.add(repositoryLocation,hotel.toString());
         return hotel;
     }
-
+    public static void deleteHotel(long id){
+        Repository.delete(id,repositoryLocation);
+    }
 
 }

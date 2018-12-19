@@ -8,12 +8,13 @@ import java.util.regex.Pattern;
 
 public class Repository {
 
-    public static String[] getListFromRepository(String path){
-
+    public static String[] getListFromRepository(String path, Pattern rightDataStructure)throws RepositoryDamaged{
         StringBuffer text=new StringBuffer();
         String line;
         try (BufferedReader br=new BufferedReader(new FileReader(path))) {
             while ((line=br.readLine())!=null){
+                if (rightDataStructure!=null&&!rightDataStructure.matcher(line).matches())
+                    throw new RepositoryDamaged("Repository " + path+" are damaged");
                 text.append(line);
                 text.append("\n");
             }
@@ -21,12 +22,6 @@ public class Repository {
             System.err.println("File "+path+" are missing");
         }
         return String.valueOf(text).split("\n");
-    }
-
-    public static void checkDataFromRepository(Pattern pattern, String text, String path) throws RepositoryDamaged {
-        Matcher matcher=pattern.matcher(text);
-               if (!matcher.matches())
-                   throw new RepositoryDamaged("Repository " + path+" are damaged");
     }
 
     public static String add (String repositoryAddres, String text){
@@ -38,6 +33,26 @@ public class Repository {
             System.err.println("Repository in "+repositoryAddres+" not found!");
         }
         return null;
+    }
+    //Method do not check information in repository
+    public static void delete(long id,String repositoryPath){
+        String[] repositoryData=null;
+        Pattern patternToCheck=Pattern.compile(Long.toString(id)+",");
+        StringBuffer newData=new StringBuffer();
+        try{
+        repositoryData=getListFromRepository(repositoryPath,null);
+        }catch (Exception e){ return;}
+        for (String object: repositoryData){
+            if (patternToCheck.matcher(object).matches())
+                continue;
+            newData.append(object);
+            newData.append("\n");
+        }
+        try(BufferedWriter br=new BufferedWriter(new FileWriter(repositoryPath,false))){
+            br.write(String.valueOf(newData));
+        }catch (IOException io){
+            System.err.println("File "+repositoryPath+" not exist!");
+        }
     }
 
 
