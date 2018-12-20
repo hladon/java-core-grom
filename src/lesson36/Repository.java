@@ -24,18 +24,16 @@ public class Repository {
         return String.valueOf(text).split("\n");
     }
 
-    public static String add (String repositoryAddres, String text){
+    public static void add (String repositoryAddres, String text){
         try (BufferedWriter br=new BufferedWriter(new FileWriter(repositoryAddres,true))){
             br.append(text);
             br.append("\n");
-            return text;
         }catch (Exception e){
             System.err.println("Repository in "+repositoryAddres+" not found!");
         }
-        return null;
     }
     //Method do not check information in repository
-    public static void delete(long id,String repositoryPath){
+    private static void changeData(long id,String repositoryPath, String changedData){
         String[] repositoryData=null;
         Pattern patternToCheck=Pattern.compile(Long.toString(id)+",");
         StringBuffer newData=new StringBuffer();
@@ -43,8 +41,10 @@ public class Repository {
         repositoryData=getListFromRepository(repositoryPath,null);
         }catch (Exception e){ return;}
         for (String object: repositoryData){
-            if (patternToCheck.matcher(object).matches())
+            if (patternToCheck.matcher(object).matches()){
+                newData.append(changedData);
                 continue;
+            }
             newData.append(object);
             newData.append("\n");
         }
