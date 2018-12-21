@@ -70,5 +70,15 @@ public class Repository {
         return list;
     }
 
+    public static String findById(String id,String[] textList){
+        String[] values;
+        for (String line: textList){
+            values=line.split("[,]");
+            if (values[1].equals(id))
+                return line;
+        }
+        return null;
+    }
+
 
 }

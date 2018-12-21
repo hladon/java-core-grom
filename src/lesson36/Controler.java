@@ -31,8 +31,10 @@ public class Controler {
     }
     // Якщо кожна кімната має унікальне id, для чого hotelId?
 
-    public void bookRoom(long roomId, long userId){
-        //TODO;
+    public void bookRoom(long roomId, long userId) throws Exception{
+        if (logedUser==null)
+            throw new UserNotLogged();
+        RoomService.roomReservation(roomId,userId);
     }
     public void cancelReservation(long roomId,long userId){
         //TODO;
