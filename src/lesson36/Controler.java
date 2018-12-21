@@ -29,7 +29,9 @@ public class Controler {
         // TODO;
         return null;
     }
-    public void bookRoom(long roomId, long userId, long hotelId){
+    // Якщо кожна кімната має унікальне id, для чого hotelId?
+
+    public void bookRoom(long roomId, long userId){
         //TODO;
     }
     public void cancelReservation(long roomId,long userId){

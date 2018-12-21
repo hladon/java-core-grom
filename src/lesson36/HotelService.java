@@ -12,19 +12,21 @@ public class HotelService {
     private static String repositoryLocation="D:\\java-core-project\\src\\lesson36\\repository\\HotelDb.txt";
 
     public static Set findHotelByName(String name)throws RepositoryDamaged {
+
        return find(name,1);
     }
     public static Set findHotelByCity(String city)throws RepositoryDamaged{
+
         return find(city,3);
     }
-    private static Set find(String name,int number)throws RepositoryDamaged{
+    private static Set find(String stringToFind,int slot)throws RepositoryDamaged{
         String[] textList= Repository.getListFromRepository(repositoryLocation,rightDataStructure);
+        Set<String> stringsList= Repository.find(stringToFind,slot,textList);
         String[] values;
         Set <Hotel> list=new HashSet<>();
-        for (String line: textList){
+        for (String line: stringsList){
             values=line.split("[,]");
-            if (values[number].equals(name))
-                list.add(new Hotel(Long.valueOf(values[0]),values[1],values[2],values[3],values[4])) ;
+            list.add(new Hotel(Long.valueOf(values[0]),values[1],values[2],values[3],values[4])) ;
         }
         return list;
     }
@@ -34,7 +36,7 @@ public class HotelService {
         return hotel;
     }
     public static void deleteHotel(long id){
-        Repository.delete(id,repositoryLocation);
+        Repository.changeData(id,repositoryLocation,"");
     }
 
 }

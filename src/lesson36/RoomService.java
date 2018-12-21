@@ -15,10 +15,10 @@ public class RoomService {
     }
 
     public static void deleteRoom(long id){
-        Repository.delete(id,repositoryLocation);
+        Repository.changeData(id,repositoryLocation,"");
     }
 
-    public static void roomReservation(long roomId, long userId, long hotelId){
+    public static void roomReservation(long roomId, long userId){
 
     }
 }

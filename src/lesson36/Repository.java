@@ -1,8 +1,11 @@
 package lesson36;
 
 import lesson36.Exceptions.RepositoryDamaged;
+import lesson36.model.Hotel;
 
 import java.io.*;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -33,7 +36,7 @@ public class Repository {
         }
     }
     //Method do not check information in repository
-    private static void changeData(long id,String repositoryPath, String changedData){
+    public static void changeData(long id,String repositoryPath, String changedData){
         String[] repositoryData=null;
         Pattern patternToCheck=Pattern.compile(Long.toString(id)+",");
         StringBuffer newData=new StringBuffer();
@@ -43,6 +46,8 @@ public class Repository {
         for (String object: repositoryData){
             if (patternToCheck.matcher(object).matches()){
                 newData.append(changedData);
+                if (!changedData.isEmpty())
+                    newData.append("\n");
                 continue;
             }
             newData.append(object);
@@ -53,6 +58,16 @@ public class Repository {
         }catch (IOException io){
             System.err.println("File "+repositoryPath+" not exist!");
         }
+    }
+    public static Set find(String stringToFind, int slot,String[] textList){
+        String[] values;
+        Set <String> list=new HashSet<>();
+        for (String line: textList){
+            values=line.split("[,]");
+            if (values[slot].equals(stringToFind))
+                 list.add(line);
+        }
+        return list;
     }
 
 
