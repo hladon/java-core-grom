@@ -29,15 +29,17 @@ public class Controler {
         // TODO;
         return null;
     }
-    // Якщо кожна кімната має унікальне id, для чого hotelId?
+    // Якщо кожна кімната має унікальне id, для чого hotelId? І куди вписувати userId?
 
     public void bookRoom(long roomId, long userId) throws Exception{
         if (logedUser==null)
             throw new UserNotLogged();
         RoomService.roomReservation(roomId,userId);
     }
-    public void cancelReservation(long roomId,long userId){
-        //TODO;
+    //Тут теж мені не зрозуміло як використати UserId?
+    public void cancelReservation(long roomId) throws Exception{
+        RoomService.cancelReservation(roomId);
+
     }
 
     public User registerUser(User user){
