@@ -1,8 +1,13 @@
 package lesson36;
 
 
+import lesson36.Exceptions.RepositoryDamaged;
+import lesson36.model.Filter;
+import lesson36.model.Hotel;
 import lesson36.model.Room;
 
+import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Pattern;
 
@@ -31,6 +36,42 @@ public class RoomService {
         }
         newData.append(String.valueOf(userId));
         Repository.changeData(roomId,repositoryLocation,String.valueOf(newData));
+    }
+    public static void cancelReservation (long id) throws Exception{
+        String object=Repository.findById(String.valueOf(id),Repository.getListFromRepository(repositoryLocation,pattern));
+        String[] fields=object.split(",");
+        Date date=new Date();
+        fields[5]=String.valueOf(date.getTime());
+        StringBuffer newData=new StringBuffer();
+        for (String field:fields){
+            newData.append(field);
+            newData.append(",");
+        }
+        newData.delete(newData.length()-2,newData.length()-1);
+        Repository.changeData(id,repositoryLocation,String.valueOf(newData));
+    }
+    public static Set<Room> findRooms(Filter filter) throws RepositoryDamaged {
+        Set<Hotel> hotels=HotelService.findHotelByCity(filter.getCity());
+        hotels.addAll(HotelService.findHotelByName(filter.getHotel()));
+        hotels.addAll(HotelService.findHotelByCountry(filter.getCountry()));
+        String[] dataBase=Repository.getListFromRepository(repositoryLocation,pattern);
+        Set<Room> rooms=new HashSet<>();
+        String[] operationWords;
+        for(String room:dataBase){
+            operationWords=room.split(",");
+            if(checker(operationWords,filter)){
+                for (Hotel hotel:hotels){
+                    if(Long.valueOf(operationWords[6])==hotel.getId())
+                        rooms.add(new Room())
+                }
+            }
+        }
 
+    }
+    private static boolean checker(String[]operationWords,Filter filter){
+        return Integer.valueOf(operationWords[1]) >= filter.getNumberOfGuests() &&
+                Boolean.valueOf(operationWords[3]) == filter.isBreakfastIncluded() &&
+                Boolean.valueOf(operationWords[4]) == filter.isPetsAllowed() &&
+                Long.valueOf(operationWords[5]) < filter.getDateAvaibleFrom().getTime();
     }
 }
