@@ -12,12 +12,13 @@ public class HotelService {
     private static String repositoryLocation="D:\\java-core-project\\src\\lesson36\\repository\\HotelDb.txt";
 
     public static Set findHotelByName(String name)throws RepositoryDamaged {
-
        return find(name,1);
     }
     public static Set findHotelByCity(String city)throws RepositoryDamaged{
-
         return find(city,3);
+    }
+    public static Set findHotelByCountry(String country)throws RepositoryDamaged{
+        return find(country,2);
     }
     private static Set find(String stringToFind,int slot)throws RepositoryDamaged{
         String[] textList= Repository.getListFromRepository(repositoryLocation,rightDataStructure);
