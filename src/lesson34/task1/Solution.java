@@ -6,7 +6,7 @@ import java.io.*;
 
 public class Solution {
 
-    public static void TransferFileContent(String fileFromPath,String fileToPath) throws Exception{
+    public static void transferFileContent(String fileFromPath,String fileToPath) throws Exception{
         validate(fileFromPath,fileToPath);
         writeToFile(fileToPath,readFromFile(fileFromPath));
         cleanFile(fileFromPath);
@@ -19,12 +19,8 @@ public class Solution {
                 res.append(line);
                 res.append("\n");
             }
-            res.replace(res.length()-1,res.length(),"");
-
-        }catch (FileNotFoundException e){
-            System.err.println("File does not exist");
-        }
-        catch (IOException e){
+            res.replace(res.length() - 1, res.length(), "");
+        }catch (IOException e){
             System.err.println("Reading from file"+path+"failed");
         }
         return res;

@@ -4,8 +4,8 @@ package lesson34.task3;
 
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import java.io.*;
+
 
 public class Solution {
     public static void copyFileContent(String fileFromPath,String fileToPath) throws Exception{
@@ -17,7 +17,8 @@ public class Solution {
         File fileFrom=new File(fileFromPath);
         String fileToCreate=fileToPath+"/fileTo.txt";
         File fileTo =new File(fileToCreate);
-        FileUtils.writeStringToFile(fileTo,FileUtils.readFileToString(fileFrom),"UTF-8");
+        FileUtils.copyFile(fileFrom,fileTo);
+
 
     }
 
