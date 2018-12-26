@@ -25,9 +25,10 @@ public class Controler {
         return HotelService.findHotelByCity(city);
     }
 
-    public  Collection findRooms(Filter filter){
-        // TODO;
-        return null;
+    public  Collection findRooms(Filter filter)throws Exception{
+        if (logedUser==null)
+            throw new UserNotLogged();
+        return RoomService.findRooms(filter);
     }
     // Якщо кожна кімната має унікальне id, для чого hotelId? І куди вписувати userId?
 

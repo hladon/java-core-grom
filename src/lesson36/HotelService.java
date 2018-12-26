@@ -26,12 +26,15 @@ public class HotelService {
         String[] values;
         Set <Hotel> list=new HashSet<>();
         for (String line: stringsList){
-            values=line.split("[,]");
-            list.add(new Hotel(Long.valueOf(values[0]),values[1],values[2],values[3],values[4])) ;
+            list.add(stringToHotel(line)) ;
         }
         return list;
     }
 
+    public static Hotel stringToHotel(String line){
+        String[] values=line.split(",");
+        return new Hotel(Long.valueOf(values[0]),values[1],values[2],values[3],values[4]) ;
+    }
     public static Hotel addHotel (Hotel hotel){
         Repository.add(repositoryLocation,hotel.toString());
         return hotel;

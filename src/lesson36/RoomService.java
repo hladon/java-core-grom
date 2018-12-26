@@ -61,12 +61,14 @@ public class RoomService {
             operationWords=room.split(",");
             if(checker(operationWords,filter)){
                 for (Hotel hotel:hotels){
-                    if(Long.valueOf(operationWords[6])==hotel.getId())
-                        rooms.add(new Room())
+                    if(Long.valueOf(operationWords[6])==hotel.getId()){
+                        rooms.add(new Room(Long.valueOf(operationWords[0]),Integer.valueOf(operationWords[1]),
+                                Double.valueOf(operationWords[2]),Boolean.valueOf(operationWords[3]),
+                                        Boolean.valueOf(operationWords[4]),new Date(Long.valueOf(operationWords[5])),hotel));}
                 }
             }
         }
-
+        return rooms;
     }
     private static boolean checker(String[]operationWords,Filter filter){
         return Integer.valueOf(operationWords[1]) >= filter.getNumberOfGuests() &&
@@ -74,4 +76,5 @@ public class RoomService {
                 Boolean.valueOf(operationWords[4]) == filter.isPetsAllowed() &&
                 Long.valueOf(operationWords[5]) < filter.getDateAvaibleFrom().getTime();
     }
+
 }

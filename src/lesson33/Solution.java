@@ -9,11 +9,10 @@ import java.util.List;
 
 public class Solution {
     public static void writeToFileFromConsole(String path) {
-
         InputStreamReader reader = new InputStreamReader(System.in);
         BufferedReader bufferedReader = new BufferedReader(reader);
-        String bufferedText ;
-        StringBuffer consoleText=new StringBuffer();
+        String bufferedText;
+        StringBuffer consoleText = new StringBuffer();
         System.out.println("Enter file content to write in the file");
         File file = new File(path);
         if (!file.exists()) {
@@ -22,13 +21,13 @@ public class Solution {
         }
         while (true) {
             try {
-                bufferedText=bufferedReader.readLine();
+                bufferedText = bufferedReader.readLine();
                 if (bufferedText.trim().equals("wr")) {
                     writeToFile(path, consoleText);
                     return;
                 }
-                consoleText.append(bufferedText+"\r\n");
-                    } catch (IOException e) {
+                consoleText.append(bufferedText + "\r\n");
+            } catch (IOException e) {
                 System.out.println("Can`t write to file " + path);
                 return;
             }
