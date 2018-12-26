@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class HotelService {
     private static Pattern rightDataStructure=Pattern.compile("\\d+,\\w+,\\w+,\\w+,\\w+");
-    private static String repositoryLocation="D:\\java-core-project\\src\\lesson36\\repository\\HotelDb.txt";
+    private static String repositoryLocation="src\\lesson36\\repository\\HotelDb.txt";
 
     public static Set findHotelByName(String name)throws RepositoryDamaged {
        return find(name,1);

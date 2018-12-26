@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class UserService {
     private static Pattern pattern=Pattern.compile("\\d+,\\w+,\\w+,\\w+,\\w+,");
-    private static String repositoryLocation="D:\\java-core-project\\src\\lesson36\\repository\\UserDb.txt";
+    private static String repositoryLocation="src\\lesson36\\repository\\UserDb.txt";
 
     public static User registerUser(User user){
         Repository.add(repositoryLocation,user.toString());
