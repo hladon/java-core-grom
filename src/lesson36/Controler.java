@@ -43,13 +43,15 @@ public class Controler {
 
     }
 
-    public User registerUser(User user){
+    public User registerUser(User user) throws WrongUserType{
+        if (logedUser==null||!logedUser.getType().equals(UserType.ADMIN))
+            throw new WrongUserType();
         return UserService.registerUser(user);
 
     }
 
     public  void login(String userName,String password) throws Exception{
-        logedUser=UserService.login(userName,password);
+          logedUser=UserService.login(userName,password);
     }
 
     public void logout(){

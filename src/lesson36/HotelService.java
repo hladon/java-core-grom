@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class HotelService {
     private static Pattern rightDataStructure=Pattern.compile("\\d+,\\w+,\\w+,\\w+,\\w+");
-    private static String repositoryLocation="src\\lesson36\\repository\\HotelDb.txt";
+    private static String repositoryLocation="src\\lesson36\\repository\\HotelDb";
 
     public static Set findHotelByName(String name)throws RepositoryDamaged {
        return find(name,1);
@@ -23,7 +23,6 @@ public class HotelService {
     private static Set find(String stringToFind,int slot)throws RepositoryDamaged{
         String[] textList= Repository.getListFromRepository(repositoryLocation,rightDataStructure);
         Set<String> stringsList= Repository.find(stringToFind,slot,textList);
-        String[] values;
         Set <Hotel> list=new HashSet<>();
         for (String line: stringsList){
             list.add(stringToHotel(line)) ;

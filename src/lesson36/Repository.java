@@ -36,15 +36,13 @@ public class Repository {
         }
     }
     //Method do not check information in repository
-    public static void changeData(long id,String repositoryPath, String changedData){
-        String[] repositoryData=null;
-        Pattern patternToCheck=Pattern.compile(Long.toString(id)+",");
+    public static void changeData(long id,String repositoryPath, String changedData) throws RepositoryDamaged{
+        String[] repositoryData=getListFromRepository(repositoryPath,null);
+        Pattern patternToCheck=Pattern.compile(String.valueOf(id)+",");
         StringBuffer newData=new StringBuffer();
-        try{
-        repositoryData=getListFromRepository(repositoryPath,null);
-        }catch (Exception e){ return;}
+        String line =findById(id,repositoryData);
         for (String object: repositoryData){
-            if (patternToCheck.matcher(object).matches()){
+            if (object.equals(line)){
                 newData.append(changedData);
                 if (!changedData.isEmpty())
                     newData.append("\n");
@@ -70,11 +68,11 @@ public class Repository {
         return list;
     }
 
-    public static String findById(String id,String[] textList){
+    public static String findById(Long id,String[] textList){
         String[] values;
         for (String line: textList){
             values=line.split("[,]");
-            if (values[1].equals(id))
+            if (Long.valueOf(values[1])==id)
                 return line;
         }
         return null;
