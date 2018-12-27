@@ -1,5 +1,6 @@
 package lesson36;
 
+import lesson36.Exceptions.ExistInRepository;
 import lesson36.Exceptions.RepositoryDamaged;
 import lesson36.model.Hotel;
 
@@ -27,29 +28,25 @@ public class Repository {
         return String.valueOf(text).split("\n");
     }
 
-    public static void add (String repositoryAddres, String text){
-        try (BufferedWriter br=new BufferedWriter(new FileWriter(repositoryAddres,true))){
-            br.append(text);
-            br.append("\n");
-        }catch (Exception e){
-            System.err.println("Repository in "+repositoryAddres+" not found!");
-        }
-    }
-    //Method do not check information in repository
-    public static void changeData(long id,String repositoryPath, String changedData) throws RepositoryDamaged{
-        String[] repositoryData=getListFromRepository(repositoryPath,null);
+    //Не знаю як краще тут бути чи розділити на два методи додавання і видалення чи лишити в одному методі?
+    public static void changeData(long id,String repositoryPath,String[] dataStored, String newDataLine) throws ExistInRepository{
         Pattern patternToCheck=Pattern.compile(String.valueOf(id)+",");
         StringBuffer newData=new StringBuffer();
-        String line =findById(id,repositoryData);
-        for (String object: repositoryData){
-            if (object.equals(line)){
-                newData.append(changedData);
-                if (!changedData.isEmpty())
-                    newData.append("\n");
+        String lineTochange=null;
+        for (String object: dataStored){
+            if (patternToCheck.matcher(object).matches()){
+                lineTochange=object;
                 continue;
             }
             newData.append(object);
             newData.append("\n");
+        }
+        if (newDataLine!=null&&lineTochange==null){
+            newData.append(newDataLine);
+            newData.append("\n");
+        }
+        if (newDataLine!=null&&lineTochange!=null){
+            throw new ExistInRepository();
         }
         try(BufferedWriter br=new BufferedWriter(new FileWriter(repositoryPath,false))){
             br.write(String.valueOf(newData));

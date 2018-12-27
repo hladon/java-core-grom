@@ -10,9 +10,9 @@ public class UserService {
     private static Pattern pattern=Pattern.compile("\\d+,\\w+,\\w+,\\w+,\\w+");
     private static String repositoryLocation="src\\lesson36\\repository\\UserDb";
 
-    public static User registerUser(User user){
-
-        Repository.add(repositoryLocation,user.toString());
+    public static User registerUser(User user) throws Exception{
+        String[] list=Repository.getListFromRepository(repositoryLocation,pattern);
+        Repository.changeData(user.getId(),repositoryLocation,list,user.toString());
         return user;
     }
     public static User login(String userName,String password) throws Exception {
