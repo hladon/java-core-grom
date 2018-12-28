@@ -12,17 +12,19 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 public class RoomService {
-    private static Pattern pattern=Pattern.compile("\\d+,\\d+,\\d+,(true|false),(true|false),\\d+,\\d+");
+    private static Pattern rightDataStructure=Pattern.compile("\\d+,\\d+,\\d+,(true|false),(true|false),\\d+,\\d+");
     private static String repositoryLocation="src\\lesson36\\repository\\RoomDb";
 
-//    public static Room addRoom (Room room){
-//        Repository.add(repositoryLocation,room.toString());
-//        return room;
-//    }
-//
-//    public static void deleteRoom(long id) throws RepositoryDamaged{
-//        Repository.changeData(id,repositoryLocation,"");
-//    }
+    public static Room addRoom (Room room) throws Exception{
+        String[] values=Repository.getListFromRepository(repositoryLocation,rightDataStructure);
+        Repository.changeData(room.getId(),repositoryLocation,values,room.toString());
+        return room;
+    }
+
+    public static void deleteRoom(long id) throws Exception{
+        String[] values=Repository.getListFromRepository(repositoryLocation,rightDataStructure);
+        Repository.changeData(id,repositoryLocation,values,null);
+    }
 
 //    public static void roomReservation(long roomId, long userId) throws Exception{
 //        String object=Repository.findById(roomId,Repository.getListFromRepository(repositoryLocation,pattern));
@@ -54,7 +56,7 @@ public class RoomService {
         Set<Hotel> hotels=HotelService.findHotelByCity(filter.getCity());
         hotels.addAll(HotelService.findHotelByName(filter.getHotel()));
         hotels.addAll(HotelService.findHotelByCountry(filter.getCountry()));
-        String[] dataBase=Repository.getListFromRepository(repositoryLocation,pattern);
+        String[] dataBase=Repository.getListFromRepository(repositoryLocation,rightDataStructure);
         Set<Room> rooms=new HashSet<>();
         String[] operationWords;
         for(String room:dataBase){

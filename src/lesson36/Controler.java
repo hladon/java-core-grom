@@ -30,9 +30,9 @@ public class Controler {
             throw new UserNotLogged();
         return RoomService.findRooms(filter);
     }
-    // Якщо кожна кімната має унікальне id, для чого hotelId? І куди вписувати userId?
+    // Якщо кожна кімната має унікальне id, для чого hotelId?
 
-//    public void bookRoom(long roomId, long userId) throws Exception{
+//    public void bookRoom(long roomId) throws Exception{
 //        if (logedUser==null)
 //            throw new UserNotLogged();
 //        RoomService.roomReservation(roomId,userId);
@@ -58,38 +58,38 @@ public class Controler {
         logedUser=null;
     }
 
-//    public Hotel addHotel(Hotel hotel)throws Exception{
-//        if (logedUser==null)
-//            throw new UserNotLogged();
-//        if (logedUser.getType().equals(UserType.ADMIN)) {
-//
-//            return HotelService.addHotel(hotel);
-//        }
-//        throw new WrongUserType();
-//    }
-//
-//    public void deleteHotel(long hotelId)throws Exception{
-//        if (logedUser==null)
-//            throw new UserNotLogged();
-//        if (logedUser.getType().equals(UserType.ADMIN)) {
-//        HotelService.deleteHotel(hotelId);}
-//    }
+    public Hotel addHotel(Hotel hotel)throws Exception{
+        if (logedUser==null)
+            throw new UserNotLogged();
+        if (logedUser.getType().equals(UserType.ADMIN)) {
 
-//    public Room addRoom(Room room)throws Exception{
-//        if (logedUser==null)
-//            throw new UserNotLogged();
-//        if (logedUser.getType().equals(UserType.ADMIN)) {
-//
-//            return RoomService.addRoom(room);
-//        }
-//        throw new WrongUserType();
-//    }
-//
-//    public void deleteRoom(long roomId)throws Exception{
-//        if (logedUser==null)
-//            throw new UserNotLogged();
-//        if (logedUser.getType().equals(UserType.ADMIN)) {
-//            RoomService.deleteRoom(roomId);}
-//    }
+            return HotelService.addHotel(hotel);
+        }
+        throw new WrongUserType();
+    }
+
+    public void deleteHotel(long hotelId)throws Exception{
+        if (logedUser==null)
+            throw new UserNotLogged();
+        if (logedUser.getType().equals(UserType.ADMIN)) {
+        HotelService.deleteHotel(hotelId);}
+    }
+
+    public Room addRoom(Room room)throws Exception{
+        if (logedUser==null)
+            throw new UserNotLogged();
+        if (logedUser.getType().equals(UserType.ADMIN)) {
+
+            return RoomService.addRoom(room);
+        }
+        throw new WrongUserType();
+    }
+
+    public void deleteRoom(long roomId)throws Exception{
+        if (logedUser==null)
+            throw new UserNotLogged();
+        if (logedUser.getType().equals(UserType.ADMIN)) {
+            RoomService.deleteRoom(roomId);}
+    }
 
 }

@@ -23,6 +23,34 @@ public class Room {
         this.hotel = hotel;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public int getNumberOfGuests() {
+        return numberOfGuests;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public boolean isBreakfastIncluded() {
+        return breakfastIncluded;
+    }
+
+    public boolean isPetsAllowed() {
+        return petsAllowed;
+    }
+
+    public Date getDateAvailableFrom() {
+        return dateAvailableFrom;
+    }
+
+    public Hotel getHotel() {
+        return hotel;
+    }
+
     @Override
     public String toString() {
         return id +","+ numberOfGuests + "," + price + "," +breakfastIncluded+","+petsAllowed+ "," +dateAvailableFrom.getTime()+ "," +hotel.getId();

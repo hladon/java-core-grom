@@ -18,4 +18,10 @@ public class Order {
         this.dateTo = dateTo;
         this.moneyPaid = moneyPaid;
     }
+
+    @Override
+    public String toString() {
+        return id +","+ user.getId() + "," + room.getId() + "," +dateFrom.getTime()+","+dateTo.getTime()+ "," +moneyPaid;
+
+    }
 }

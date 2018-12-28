@@ -30,11 +30,11 @@ public class Repository {
 
     //Не знаю як краще тут бути чи розділити на два методи додавання і видалення чи лишити в одному методі?
     public static void changeData(long id,String repositoryPath,String[] dataStored, String newDataLine) throws ExistInRepository{
-        Pattern patternToCheck=Pattern.compile(String.valueOf(id)+",");
+        Pattern patternToCheck=Pattern.compile(id+",");
         StringBuffer newData=new StringBuffer();
         String lineTochange=null;
         for (String object: dataStored){
-            if (patternToCheck.matcher(object).matches()){
+            if (patternToCheck.matcher(object).find()){
                 lineTochange=object;
                 continue;
             }

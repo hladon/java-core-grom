@@ -34,12 +34,14 @@ public class HotelService {
         String[] values=line.split(",");
         return new Hotel(Long.valueOf(values[0]),values[1],values[2],values[3],values[4]) ;
     }
-//    public static Hotel addHotel (Hotel hotel){
-//        Repository.add(repositoryLocation,hotel.toString());
-//        return hotel;
-//    }
-//    public static void deleteHotel(long id){
-//        Repository.changeData(id,repositoryLocation,"");
-//    }
+    public static Hotel addHotel (Hotel hotel) throws Exception{
+        String[] values=Repository.getListFromRepository(repositoryLocation,rightDataStructure);
+        Repository.changeData(hotel.getId(),repositoryLocation,values,hotel.toString());
+        return hotel;
+    }
+    public static void deleteHotel(long id) throws Exception{
+        String[] values=Repository.getListFromRepository(repositoryLocation,rightDataStructure);
+        Repository.changeData(id,repositoryLocation,values,null);
+    }
 
 }
