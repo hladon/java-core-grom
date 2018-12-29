@@ -28,8 +28,7 @@ public class Repository {
         return String.valueOf(text).split("\n");
     }
 
-    //Не знаю як краще тут бути чи розділити на два методи додавання і видалення чи лишити в одному методі?
-    public static void changeData(long id,String repositoryPath,String[] dataStored, String newDataLine) throws ExistInRepository{
+     public static void changeData(long id,String repositoryPath,String[] dataStored, String newDataLine) throws ExistInRepository{
         Pattern patternToCheck=Pattern.compile(id+",");
         StringBuffer newData=new StringBuffer();
         String lineTochange=null;

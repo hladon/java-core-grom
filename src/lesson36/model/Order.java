@@ -19,6 +19,30 @@ public class Order {
         this.moneyPaid = moneyPaid;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public Date getDateFrom() {
+        return dateFrom;
+    }
+
+    public Date getDateTo() {
+        return dateTo;
+    }
+
+    public double getMoneyPaid() {
+        return moneyPaid;
+    }
+
     @Override
     public String toString() {
         return id +","+ user.getId() + "," + room.getId() + "," +dateFrom.getTime()+","+dateTo.getTime()+ "," +moneyPaid;
