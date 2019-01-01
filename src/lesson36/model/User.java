@@ -13,7 +13,7 @@ public class User {
 
     @Override
     public String toString() {
-        return id +","+ userName + ","+ password + "," + country + "," +type.toString();
+        return id + "," + userName + "," + password + "," + country + "," + type.toString();
 
     }
 

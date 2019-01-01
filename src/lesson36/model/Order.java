@@ -45,7 +45,7 @@ public class Order {
 
     @Override
     public String toString() {
-        return id +","+ user.getId() + "," + room.getId() + "," +dateFrom.getTime()+","+dateTo.getTime()+ "," +moneyPaid;
+        return id + "," + user.getId() + "," + room.getId() + "," + dateFrom.getTime() + "," + dateTo.getTime() + "," + moneyPaid;
 
     }
 }

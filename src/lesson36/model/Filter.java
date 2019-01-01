@@ -11,8 +11,8 @@ public class Filter {
     private boolean petsAllowed;
     private Date dateAvailableFrom;
 
-    public Filter(String country, String city,String hotel, int numberOfGuests, boolean breakfastIncluded, boolean petsAllowed, Date dateAvailableFrom) {
-        this.hotel=hotel;
+    public Filter(String country, String city, String hotel, int numberOfGuests, boolean breakfastIncluded, boolean petsAllowed, Date dateAvailableFrom) {
+        this.hotel = hotel;
         this.country = country;
         this.city = city;
         this.numberOfGuests = numberOfGuests;

@@ -53,7 +53,7 @@ public class Room {
 
     @Override
     public String toString() {
-        return id +","+ numberOfGuests + "," + price + "," +breakfastIncluded+","+petsAllowed+ "," +dateAvailableFrom.getTime()+ "," +hotel.getId();
+        return id + "," + numberOfGuests + "," + price + "," + breakfastIncluded + "," + petsAllowed + "," + dateAvailableFrom.getTime() + "," + hotel.getId();
 
     }
 }

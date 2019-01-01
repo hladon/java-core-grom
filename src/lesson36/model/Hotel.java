@@ -10,8 +10,8 @@ public class Hotel {
     private String city;
     private String street;
 
-    public Hotel(long id,String name, String country, String city, String street) {
-        this.id= id;
+    public Hotel(long id, String name, String country, String city, String street) {
+        this.id = id;
         this.name = name;
         this.country = country;
         this.city = city;
@@ -36,7 +36,7 @@ public class Hotel {
 
     @Override
     public String toString() {
-        return id +","+ name + "," + country + "," +city+","+street;
+        return id + "," + name + "," + country + "," + city + "," + street;
 
     }
 
