@@ -35,7 +35,7 @@ public class Controler {
     public void bookRoom(long roomId, long userId) throws Exception {
         if (logedUser == null)
             throw new UserNotLogged();
-        RoomService.roomReservation(roomId, userId);
+        RoomService.bookRoom(roomId, userId);
     }
 
     public void cancelReservation(long roomId, long userId) throws Exception {

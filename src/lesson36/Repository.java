@@ -71,7 +71,7 @@ public class Repository {
         String[] values;
         for (String line : textList) {
             values = line.split("[,]");
-            if (Long.valueOf(values[1]) == id)
+            if (Long.valueOf(values[0]) == id)
                 return line;
         }
         return null;

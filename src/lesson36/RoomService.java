@@ -26,7 +26,7 @@ public class RoomService {
         Repository.changeData(id, repositoryLocation, values, null);
     }
 
-    public static void roomReservation(long roomId, long userId) throws Exception {
+    public static void bookRoom(long roomId, long userId) throws Exception {
         reservationOperation(roomId, true);
         OrderService.createOrder(roomId, userId);
     }
@@ -53,7 +53,6 @@ public class RoomService {
             newData.append(",");
         }
         newData.delete(newData.length() - 1, newData.length());
-        System.out.println(newData);
         Repository.changeData(roomId, repositoryLocation, objectList, String.valueOf(newData));
     }
 
