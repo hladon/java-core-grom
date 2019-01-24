@@ -5,25 +5,24 @@ import lesson36.Exceptions.RepositoryDamaged;
 
 import java.io.*;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 
 public class Repository {
 
-    public static String[] getListFromRepository(String path, Pattern rightDataStructure) throws Exception {
-        StringBuffer text = new StringBuffer();
+    public static List<String> getListFromRepository(String path) throws Exception {
+        List list=new LinkedList();
         String line;
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             while ((line = br.readLine()) != null) {
-                if (line != null && !rightDataStructure.matcher(line).matches())
-                    throw new RepositoryDamaged("Repository " + path + " are damaged");
-                text.append(line);
-                text.append("\n");
+                   list.add(line);
             }
         } catch (IOException io) {
             throw new IOException("File " + path + " are missing");
         }
-        return String.valueOf(text).split("\n");
+        return list;
     }
 
     public static void changeData(long id, String repositoryPath, String[] dataStored, String newDataLine) {
@@ -56,16 +55,6 @@ public class Repository {
         }
     }
 
-    public static Set find(String stringToFind, int slot, String[] textList) {
-        String[] values;
-        Set<String> list = new HashSet<>();
-        for (String line : textList) {
-            values = line.split("[,]");
-            if (values[slot].equalsIgnoreCase(stringToFind))
-                list.add(line);
-        }
-        return list;
-    }
 
     public static String findById(Long id, String[] textList) {
         String[] values;
