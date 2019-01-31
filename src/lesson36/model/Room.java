@@ -1,10 +1,9 @@
 package lesson36.model;
 
-import lesson36.model.Hotel;
 
 import java.util.Date;
 
-public class Room {
+public class Room extends IdEntity {
     private long id;
     private int numberOfGuests;
     private double price;
@@ -49,6 +48,34 @@ public class Room {
 
     public Hotel getHotel() {
         return hotel;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setNumberOfGuests(int numberOfGuests) {
+        this.numberOfGuests = numberOfGuests;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public void setBreakfastIncluded(boolean breakfastIncluded) {
+        this.breakfastIncluded = breakfastIncluded;
+    }
+
+    public void setPetsAllowed(boolean petsAllowed) {
+        this.petsAllowed = petsAllowed;
+    }
+
+    public void setDateAvailableFrom(Date dateAvailableFrom) {
+        this.dateAvailableFrom = dateAvailableFrom;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
     }
 
     @Override

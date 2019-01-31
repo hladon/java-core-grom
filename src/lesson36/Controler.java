@@ -2,10 +2,7 @@ package lesson36;
 
 import lesson36.Exceptions.UserNotLogged;
 import lesson36.Exceptions.WrongUserType;
-import lesson36.model.Filter;
-import lesson36.model.Hotel;
-import lesson36.model.Room;
-import lesson36.model.User;
+import lesson36.model.*;
 
 import java.util.Collection;
 import java.util.Set;
@@ -30,12 +27,12 @@ public class Controler {
             throw new UserNotLogged();
         return RoomService.findRooms(filter);
     }
-    // Якщо кожна кімната має унікальне id, для чого hotelId?
+//     Якщо кожна кімната має унікальне id, для чого hotelId?
 
     public void bookRoom(long roomId, long userId) throws Exception {
         if (logedUser == null)
             throw new UserNotLogged();
-        RoomService.bookRoom(roomId, userId);
+        RoomService.roomReservation(roomId, userId);
     }
 
     public void cancelReservation(long roomId, long userId) throws Exception {
@@ -46,7 +43,7 @@ public class Controler {
     }
 
     public User registerUser(User user) throws Exception {
-        if (logedUser == null || !logedUser.getType().equals(UserType.ADMIN))
+        if ( user.getType().equals(UserType.ADMIN)&&(logedUser==null||logedUser.getType().equals(UserType.USER)))
             throw new WrongUserType();
         return UserService.registerUser(user);
 
@@ -82,7 +79,6 @@ public class Controler {
         if (logedUser == null)
             throw new UserNotLogged();
         if (logedUser.getType().equals(UserType.ADMIN)) {
-
             return RoomService.addRoom(room);
         }
         throw new WrongUserType();
@@ -94,6 +90,7 @@ public class Controler {
         if (logedUser.getType().equals(UserType.ADMIN)) {
             RoomService.deleteRoom(roomId);
         }
+        throw new WrongUserType();
     }
 
 }

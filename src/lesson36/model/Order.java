@@ -1,8 +1,9 @@
 package lesson36.model;
 
 import java.util.Date;
+import java.util.Objects;
 
-public class Order {
+public class Order extends IdEntity{
     private long id;
     private User user;
     private Room room;
@@ -47,5 +48,18 @@ public class Order {
     public String toString() {
         return id + "," + user.getId() + "," + room.getId() + "," + dateFrom.getTime() + "," + dateTo.getTime() + "," + moneyPaid;
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return id == order.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
