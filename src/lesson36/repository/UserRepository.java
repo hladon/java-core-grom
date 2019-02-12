@@ -4,7 +4,7 @@ import lesson36.Exceptions.RepositoryDamaged;
 import lesson36.model.UserType;
 import lesson36.model.User;
 
-public class UserRepository extends Repository {
+public class UserRepository extends Repository<User> {
     private static String repositoryLocation = "src\\lesson36\\repository\\UserDb";
 
     public UserRepository() {

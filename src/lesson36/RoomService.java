@@ -16,7 +16,7 @@ public class RoomService {
     private static RoomRepository repository = new RoomRepository();
 
     public static Room addRoom(Room room) throws Exception {
-        return repository.add(room);
+        return repository.save(room);
     }
 
     public static void deleteRoom(long id) throws Exception {
@@ -29,7 +29,7 @@ public class RoomService {
             return;
         room.setDateAvailableFrom(new Date(room.getDateAvailableFrom().getTime() + 604800000));
         repository.delete(roomId);
-        repository.add(room);
+        repository.save(room);
         OrderService.createOrder(roomId, userId);
     }
 
@@ -40,7 +40,7 @@ public class RoomService {
             return;
         room.setDateAvailableFrom(new Date());
         repository.delete(roomId);
-        repository.add(room);
+        repository.save(room);
         OrderService.deleteOrder(roomId, userId);
     }
 

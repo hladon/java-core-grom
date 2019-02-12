@@ -22,7 +22,7 @@ public class TestPerformance {
         }
         Date finish = new Date();
         long diff = finish.getTime() - start.getTime();
-        System.out.println("add-array list " + diff);
+        System.out.println("save-array list " + diff);
         LinkedList linkedList = new LinkedList();
 
         Date start1 = new Date();
@@ -31,7 +31,7 @@ public class TestPerformance {
         }
         Date finish1 = new Date();
         diff = finish1.getTime() - start1.getTime();
-        System.out.println("add-linked list " + diff);
+        System.out.println("save-linked list " + diff);
     }
 
     private static void testRemoveMethod() {

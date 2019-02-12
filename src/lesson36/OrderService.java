@@ -15,7 +15,7 @@ public class OrderService {
         long id = dateCreated.getTime();
         long dateTo = id + 604800000;
         String orderData = id + "," + userId + "," + roomId + "," + id + "," + dateTo + "," + 0;
-        repository.add(repository.convert(orderData));
+        repository.save(repository.convert(orderData));
     }
 
     private static Order find(long roomId, long userId) throws Exception {

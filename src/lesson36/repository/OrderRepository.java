@@ -6,7 +6,7 @@ import lesson36.model.Order;
 import java.util.Date;
 
 
-public class OrderRepository extends Repository {
+public class OrderRepository extends Repository<Order> {
     private static String repositoryLocation = "src\\lesson36\\repository\\OrderDb";
     private static UserRepository userRepository = new UserRepository();
     private static RoomRepository roomRepository = new RoomRepository();

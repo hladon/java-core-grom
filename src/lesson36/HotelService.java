@@ -50,7 +50,7 @@ public class HotelService {
 
 
     public static Hotel addHotel(Hotel hotel) throws Exception {
-        return repository.add(hotel);
+        return repository.save(hotel);
     }
 
     public static void deleteHotel(long id) throws Exception {

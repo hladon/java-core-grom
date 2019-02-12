@@ -4,7 +4,7 @@ import lesson36.Exceptions.RepositoryDamaged;
 import lesson36.model.Hotel;
 
 
-public class HotelRepository extends Repository {
+public class HotelRepository extends Repository<Hotel> {
     private static String repositoryLocation = "src\\lesson36\\repository\\HotelDb";
 
     public HotelRepository() {

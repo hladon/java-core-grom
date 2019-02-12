@@ -1,6 +1,7 @@
 package lesson36;
 
 
+import lesson36.Exceptions.ExistInRepository;
 import lesson36.Exceptions.WrongPassword;
 import lesson36.model.User;
 import lesson36.repository.UserRepository;
@@ -12,9 +13,11 @@ public class UserService {
     private static UserRepository repository = new UserRepository();
 
     public static User registerUser(User user) throws Exception {
-        List<User> list = repository.getList();
-        list.add(user);
-        repository.save(list);
+        for (User it:repository.getList()){
+            if (it.equals(user))
+                throw new ExistInRepository();
+        }
+        repository.save(user);
         return user;
     }
 

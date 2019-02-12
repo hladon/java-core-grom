@@ -6,7 +6,7 @@ import lesson36.model.Room;
 
 import java.util.Date;
 
-public class RoomRepository extends Repository {
+public class RoomRepository extends Repository<Room> {
     private static String repositoryLocation = "src\\lesson36\\repository\\RoomDb";
     private static HotelRepository hotelRepository = new HotelRepository();
 
