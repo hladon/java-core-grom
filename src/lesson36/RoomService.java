@@ -4,6 +4,7 @@ package lesson36;
 import lesson36.model.Filter;
 import lesson36.model.Hotel;
 import lesson36.model.Room;
+import lesson36.repository.HotelRepository;
 import lesson36.repository.RoomRepository;
 
 import java.util.Date;
@@ -14,6 +15,7 @@ import java.util.Set;
 
 public class RoomService {
     private static RoomRepository repository = new RoomRepository();
+    private static HotelRepository hotelRepository=new HotelRepository();
 
     public static Room addRoom(Room room) throws Exception {
         return repository.save(room);
@@ -56,8 +58,8 @@ public class RoomService {
                     room.isBreakfastIncluded() == filter.isBreakfastIncluded() &&
                     room.isPetsAllowed() == filter.isPetsAllowed() &&
                     room.getNumberOfGuests() >= filter.getNumberOfGuests() &&
-                    checkHotelForRoom(room, hotels)) {
-                rooms.add(room);
+                    checkHotelForRoom(room, filter)) {
+                    rooms.add(room);
             }
 
         }
@@ -65,12 +67,10 @@ public class RoomService {
     }
 
 
-    private static boolean checkHotelForRoom(Room room, Set<Hotel> hotels) {
-        for (Hotel hotel : hotels) {
-            if (room.getHotel().getId() == hotel.getId())
-                return true;
-        }
-        return false;
+    private static boolean checkHotelForRoom(Room room, Filter filter) {
+        return room.getHotel().getCountry().equalsIgnoreCase(filter.getCountry())&&
+                room.getHotel().getCity().equalsIgnoreCase(filter.getCity())&&
+                room.getHotel().getName().equalsIgnoreCase(filter.getHotel());
     }
 
 }

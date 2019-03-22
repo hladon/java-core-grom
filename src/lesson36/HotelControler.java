@@ -7,23 +7,23 @@ import lesson36.model.UserType;
 
 import java.util.Set;
 
-public class HotelControler extends Controler {
+public class HotelControler  {
 
     public static Set findHotelByName(String name) throws Exception {
-        if (logedUser == null)
+        if (Session.getLogedUser() == null)
             throw new UserNotLogged();
         return HotelService.findHotelByName(name);
     }
 
     public static Set findHotelByCity(String city) throws Exception {
-        if (logedUser == null)
+        if (Session.getLogedUser() == null)
             throw new UserNotLogged();
         return HotelService.findHotelByCity(city);
     }
     public static Hotel addHotel(Hotel hotel) throws Exception {
-        if (logedUser == null)
+        if (Session.getLogedUser() == null)
             throw new UserNotLogged();
-        if (logedUser.getType().equals(UserType.ADMIN)) {
+        if (Session.getLogedUser().getType().equals(UserType.ADMIN)) {
 
             return HotelService.addHotel(hotel);
         }
@@ -31,9 +31,9 @@ public class HotelControler extends Controler {
     }
 
     public static void deleteHotel(long hotelId) throws Exception {
-        if (logedUser == null)
+        if (Session.getLogedUser() == null)
             throw new UserNotLogged();
-        if (logedUser.getType().equals(UserType.ADMIN)) {
+        if (Session.getLogedUser().getType().equals(UserType.ADMIN)) {
             HotelService.deleteHotel(hotelId);
         }
     }
